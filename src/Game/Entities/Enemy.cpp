@@ -43,21 +43,21 @@ void Enemy::tickOverworld()
         walking = true;
         switch (direction)
         {
-        case Direction::left:
+        case Direction::right:
             direction = Direction::up;
             break;
-        case Direction::right:
+        case Direction::left:
             direction = Direction::down;
             break;
-        case Direction::up:
+        case Direction::down:
             direction = Direction::right;
             break;
-        case Direction::down:
+        case Direction::up:
             direction = Direction::left;
             break;
         }
     }
-    if (moveTimer == 45)
+    if (moveTimer == 20)
     {
         walking = false;
     }
