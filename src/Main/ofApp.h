@@ -38,4 +38,5 @@ class ofApp : public ofBaseApp{
 		EndGameState *endGameState;
 		Player *player;
 		PauseState *pauseState;
+		int playerHealth;
 };

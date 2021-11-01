@@ -2,7 +2,7 @@
 
 PauseState::PauseState() {
 	pauseScreen.load("images/ui/pauseScreen.png");
-	music.load("audio/ui/errorNoise.mp3");
+	music.load("audio/ui/errorNoise.wav");
 	music.setSpeed(1.2);
 	music.setVolume(1);
 }

@@ -17,6 +17,9 @@ void ofApp::setup()
 
 	// Initial State
 	currentState = titleState;
+
+	//Health displayed in HUD
+	playerHealth=player->getHealth();
 }
 
 //--------------------------------------------------------------
@@ -58,6 +61,9 @@ void ofApp::update()
 	if (currentState != nullptr)
 	{
 		currentState->tick();
+
+		playerHealth= battleState->getCurrentPlayerHealth();
+
 		if (currentState->hasFinished())
 		{
 			currentState->toggleMusic();
@@ -136,6 +142,25 @@ void ofApp::draw()
 	if (currentState != nullptr)
 	{
 		currentState->render();
+	}
+
+	//Drawing HUD
+	if( currentState== overworldState){
+		string HP= "HP:" + to_string(playerHealth) + "/100";
+		string enemies= "REMAINING ENEMIES: " + to_string(currentArea-> getRemainingEnemies());
+		ofSetColor(51,51,255);
+
+		ofDrawRectangle(10, ofGetHeight()-57, ofGetWidth()/3 - 50, 55);
+
+		ofSetColor(255);
+		ofDrawBitmapString(HP, 40, ofGetHeight() - 40);
+		ofDrawBitmapString(enemies, 10, ofGetHeight()-10);
+		if(currentArea == area1){
+			ofDrawBitmapString("AREA: PLAINS", 35, ofGetHeight()-25);
+		}
+		if(currentArea == area2){
+			ofDrawBitmapString("AREA: ICE CAVES", 35, ofGetHeight()-25);
+		}
 	}
 }
 
