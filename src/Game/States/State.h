@@ -35,22 +35,27 @@ class State {
 		void setFinished(bool finished){
 			this->finished = finished;
 		}
-
 		void setNextState(string nextState){
 			this->nextState = nextState;
 		}
-//=================
-string getCurrentStateName(){
-	return currentStateName;
-}
-void setCurrentStateName(string currentStateName){
-	this->currentStateName= currentStateName;
-}
+	    string getCurrentStateName(){ 
+			return currentStateName;
+		}
+		void setCurrentStateName(string currentStateName){
+			this->currentStateName= currentStateName;
+			}
+		string getNextNextState(){ 
+			return nextNextState;
+		}
+		void setNextNextState(string nextNextState){ 
+			this->nextNextState = nextNextState;
+		}
+
 //===================
 	protected:
 		string nextState;
 		ofSoundPlayer music;
 		bool finished = false;
 		string currentStateName;
-
+        string nextNextState;
 };

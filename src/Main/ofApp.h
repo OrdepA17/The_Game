@@ -7,6 +7,7 @@
 #include "WinState.h"
 #include "EndGameState.h"
 #include "PauseState.h"
+#include "Loading.h"
 
 class ofApp : public ofBaseApp{
 	public:
@@ -38,5 +39,9 @@ class ofApp : public ofBaseApp{
 		EndGameState *endGameState;
 		Player *player;
 		PauseState *pauseState;
+<<<<<<< HEAD
 		int playerHealth;
+=======
+		LoadingState *loadingState;
+>>>>>>> branch_
 };

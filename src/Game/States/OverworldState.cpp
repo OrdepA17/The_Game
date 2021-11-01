@@ -31,6 +31,7 @@ void OverworldState::tick()
             if (player->collides(area->getEnemies().at(i)))
             {
                 setEnemy(area->getEnemies().at(i));
+                setNextState("Loading");
                 setNextState("Battle");
                 setFinished(true);
             }
@@ -60,9 +61,15 @@ void OverworldState::render()
 void OverworldState::keyPressed(int key)
 {
     player->keyPressed(key);
+<<<<<<< HEAD
     
     if(key=='p'||key=='P'){
         setCurrentStateName("Overworld");
+=======
+
+    if (key == 'p'){
+        setCurrentStateName ("Overworld");
+>>>>>>> branch_
         setNextState("Pause");
         setFinished(true);
         return;
