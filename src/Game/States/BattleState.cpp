@@ -298,6 +298,12 @@ void BattleState::resetPlayer()
     currentPlayerHealth = player->getHealth();
 }
 
+// Used for the HUD
 int BattleState::getCurrentPlayerHealth(){
     return currentPlayerHealth;
+}
+
+//Used for key debug
+void BattleState::setCurrentPlayerHealth(int maxHealth){
+    currentPlayerHealth = maxHealth;
 }

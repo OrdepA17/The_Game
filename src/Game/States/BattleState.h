@@ -42,6 +42,12 @@ class BattleState : public State {
         void mousePressed(int x, int y, int button);
         void reset();
         void resetPlayer();
+
+        //Used for HUD
         int getCurrentPlayerHealth();
+
+        //Used for key debug
+        void setCurrentPlayerHealth(int hp);
+
 
 };

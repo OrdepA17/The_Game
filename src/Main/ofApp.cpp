@@ -169,8 +169,15 @@ void ofApp::keyPressed(int key)
 {
 	if (currentState != nullptr){
 		currentState->keyPressed(key);
-
 	
+	if(key == 'h'|| key == 'H'){ battleState->setCurrentPlayerHealth(100);}
+
+	if (key == 'r'|| key == 'R'){
+
+		if(currentArea == area1){area1->resetEnemies();}
+		
+		if(currentArea == area2){area2->resetEnemies();}
+	}
 }
 
 }
