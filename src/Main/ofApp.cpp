@@ -78,14 +78,16 @@ void ofApp::update()
 			}
 			else if (currentState->getNextState() == "Battle")
 			{
-				//
+				//Fix PauseState when also in Battle State
 				if(currentState==pauseState){
 					battleState->setCurrentStateName("Pause");
 					}
 
-				 else {battleState->startBattle(overworldState->getEnemy());
+				 else {battleState->setCurrentStateName("Battle");}
+
+				 battleState->startBattle(overworldState->getEnemy());
 				currentState = battleState;
-				}
+				
 			}
 			else if (currentState->getNextState() == "Win")
 			{
@@ -110,15 +112,16 @@ void ofApp::update()
 					currentState = winState;
 				}
 			}
-			//
+			//PauseState fix
 			else if (currentState->getNextState()=="Pause"){
 			if (currentState->getCurrentStateName()== "Overworld")
 			pauseState->setNextState("Overworld");
 			
 			if(currentState->getCurrentStateName()== "Battle")
 			pauseState->setNextState("Battle");
+			currentState= pauseState;
 			}
-			//
+			
 			else if (currentState->getNextState() == "End")
 				currentState = endGameState;
 			currentState->toggleMusic();

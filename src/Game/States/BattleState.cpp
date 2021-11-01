@@ -27,7 +27,7 @@ void BattleState::startBattle(Enemy *enemy)
 {
     this->enemy = enemy;
     
-    if(getCurrentStateName()!="Pause")
+    if(getCurrentStateName() != "Pause")
      currentEnemyHealth = enemy->getHealth();
 }
 

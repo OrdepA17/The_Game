@@ -60,6 +60,13 @@ void OverworldState::render()
 void OverworldState::keyPressed(int key)
 {
     player->keyPressed(key);
+    
+    if(key=='p'||key=='P'){
+        setCurrentStateName("Overworld");
+        setNextState("Pause");
+        setFinished(true);
+        return;
+    }
 }
 
 void OverworldState::keyReleased(int key)

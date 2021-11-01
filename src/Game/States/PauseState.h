@@ -3,7 +3,7 @@
 class PauseState: public State
 {
 	private:
-	ofImage screen;
+	ofImage pauseScreen;
 
 	public:
 

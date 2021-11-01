@@ -1,20 +1,22 @@
 #include "PauseState.h"
 
 PauseState::PauseState() {
-	screen.load("images/ui/pause.png");
-	music.load("audio/ui/beep.wav");
-
+	pauseScreen.load("images/ui/pauseScreen.png");
+	music.load("audio/ui/errorNoise.mp3");
+	music.setSpeed(1.2);
+	music.setVolume(1);
 }
 void PauseState::tick() {
 
 }
 void PauseState::render() {
-	screen.draw(0,0,ofGetWidth(),ofGetHeight());
+	pauseScreen.draw(0,0,ofGetWidth(),ofGetHeight());
+	
 }
 
 void PauseState::keyPressed(int key) {
 if (key=='p'){
-	setNextState("overworld");
+	setNextState("Overworld");
 	setFinished(true);
 }
 }
