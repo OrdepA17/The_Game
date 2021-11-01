@@ -39,10 +39,18 @@ class State {
 		void setNextState(string nextState){
 			this->nextState = nextState;
 		}
-
+//=================
+string getCurrentStateName(){
+	return currentStateName;
+}
+void setCurrentStateName(string currentStateName){
+	this->currentStateName= currentStateName;
+}
+//===================
 	protected:
 		string nextState;
 		ofSoundPlayer music;
 		bool finished = false;
+		string currentStateName;
 
 };

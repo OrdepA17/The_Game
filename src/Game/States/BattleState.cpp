@@ -26,7 +26,9 @@ BattleState::BattleState(Player *player, Area *area)
 void BattleState::startBattle(Enemy *enemy)
 {
     this->enemy = enemy;
-    currentEnemyHealth = enemy->getHealth();
+    
+    if(getCurrentStateName()!="Pause")
+     currentEnemyHealth = enemy->getHealth();
 }
 
 void BattleState::tick()
@@ -270,6 +272,11 @@ void BattleState::keyPressed(int key)
             }
         }
     }
+    if (key=='p'){
+		setCurrentStateName ("Battle");
+		setNextState("Pause");
+		setFinished(true);
+	}
 }
 
 void BattleState::keyReleased(int key)

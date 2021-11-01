@@ -13,6 +13,7 @@ void ofApp::setup()
 	battleState = new BattleState(player, currentArea);
 	winState = new WinState();
 	endGameState = new EndGameState();
+	pauseState = new PauseState();
 
 	// Initial State
 	currentState = titleState;
@@ -77,8 +78,14 @@ void ofApp::update()
 			}
 			else if (currentState->getNextState() == "Battle")
 			{
-				battleState->startBattle(overworldState->getEnemy());
+				//
+				if(currentState==pauseState){
+					battleState->setCurrentStateName("Pause");
+					}
+
+				 else {battleState->startBattle(overworldState->getEnemy());
 				currentState = battleState;
+				}
 			}
 			else if (currentState->getNextState() == "Win")
 			{
@@ -103,6 +110,15 @@ void ofApp::update()
 					currentState = winState;
 				}
 			}
+			//
+			else if (currentState->getNextState()=="Pause"){
+			if (currentState->getCurrentStateName()== "Overworld")
+			pauseState->setNextState("Overworld");
+			
+			if(currentState->getCurrentStateName()== "Battle")
+			pauseState->setNextState("Battle");
+			}
+			//
 			else if (currentState->getNextState() == "End")
 				currentState = endGameState;
 			currentState->toggleMusic();
@@ -123,17 +139,21 @@ void ofApp::draw()
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key)
 {
-	if (currentState != nullptr)
+	if (currentState != nullptr){
 		currentState->keyPressed(key);
+
+	
 }
 
-//--------------------------------------------------------------
+}
+//-----------------------------------------------------------------------
+
+//-------------------------------------------------------------
 void ofApp::keyReleased(int key)
 {
-	if (currentState != nullptr)
+		if (currentState != nullptr)
 		currentState->keyReleased(key);
 }
-
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y)
 {
