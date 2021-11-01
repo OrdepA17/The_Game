@@ -39,9 +39,6 @@ class ofApp : public ofBaseApp{
 		EndGameState *endGameState;
 		Player *player;
 		PauseState *pauseState;
-<<<<<<< HEAD
 		int playerHealth;
-=======
 		LoadingState *loadingState;
->>>>>>> branch_
 };
