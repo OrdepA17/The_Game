@@ -26,6 +26,7 @@ void TitleState::render(){
 
 void TitleState::keyPressed(int key) {
     setNextState("Overworld");
+    setNextState("loading");
     setFinished(true);
 }
 
