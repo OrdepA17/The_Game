@@ -44,11 +44,11 @@ class State {
 		void setCurrentStateName(string currentStateName){
 			this->currentStateName= currentStateName;
 			}
-		string getNextNextState(){ 
-			return nextNextState;
+		string getAfterState(){ 
+			return AfterState;
 		}
-		void setNextNextState(string nextNextState){ 
-			this->nextNextState = nextNextState;
+		void setAfterState(string AfterState){ 
+			this->AfterState = AfterState;
 		}
 
 //===================
@@ -57,5 +57,5 @@ class State {
 		ofSoundPlayer music;
 		bool finished = false;
 		string currentStateName;
-        string nextNextState;
+        string AfterState;
 };

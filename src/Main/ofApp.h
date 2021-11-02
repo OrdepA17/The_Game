@@ -40,5 +40,5 @@ class ofApp : public ofBaseApp{
 		Player *player;
 		PauseState *pauseState;
 		int playerHealth;
-		LoadingState *loadingState;
+		LoadingState *loadingState;		
 };

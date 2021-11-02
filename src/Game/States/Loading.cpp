@@ -3,8 +3,8 @@
 
 LoadingState::LoadingState() {
     screen.load("images/ui/loading.png");
-    screen.draw(0,0,ofGetHeight(),ofGetWidth());
-    music.load("audio/ui/beep.wav");
+    music.load("audio/ui/loading.wav");
+    music.setVolume(0.7);
     timer = 0;
 }
 
@@ -16,12 +16,16 @@ void LoadingState::tick() {
         timer = 0;
     }
 }
-
 void LoadingState::render(){
     screen.draw(0, 0, ofGetWidth(), ofGetHeight());
 }
 
 void LoadingState::keyPressed(int key) { 
-    setFinished(false);
-    //setNextState("");
+
     }
+
+void LoadingState::mousePressed(int x, int y, int button){};
+
+void LoadingState::reset() {
+    setFinished(false);
+}

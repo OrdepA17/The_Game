@@ -14,6 +14,7 @@ void ofApp::setup()
 	winState = new WinState();
 	endGameState = new EndGameState();
 	pauseState = new PauseState();
+	loadingState = new LoadingState();
 
 	// Initial State
 	currentState = titleState;
@@ -77,6 +78,22 @@ void ofApp::update()
 				battleState->setStage(currentArea->getStage());
 				overworldState->loadArea(currentArea);
 				currentState = titleState;
+			}
+			else if (currentState->getNextState().compare("Loading") == 0){
+				
+				if(currentState->getAfterState().compare("Overworld") == 0){
+					loadingState->setNextState("Overworld");}
+								
+				
+				if(currentState->getAfterState().compare("Battle") == 0){
+					loadingState->setNextState("Battle");}
+
+
+				if(currentState->getAfterState().compare("Title") == 0){
+					loadingState->setNextState("Title");}				
+
+				currentState = loadingState;
+			
 			}
 			else if (currentState->getNextState() == "Overworld")
 			{
@@ -170,7 +187,15 @@ void ofApp::keyPressed(int key)
 	if (currentState != nullptr){
 		currentState->keyPressed(key);
 
-	
+
+	if(key == 'h'|| key == 'H'){ battleState->setCurrentPlayerHealth(100);}
+
+	if (key == 'r'|| key == 'R'){
+
+		if(currentArea == area1){area1->resetEnemies();}
+
+		if(currentArea == area2){area2->resetEnemies();}
+	}
 }
 
 }

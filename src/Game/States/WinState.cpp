@@ -16,7 +16,7 @@ void WinState::render(){
 
 void WinState::keyPressed(int key) {
     setNextState("Loading");
-    setNextState("Overworld");
+    setAfterState("Overworld");
     setFinished(true);
 }
 

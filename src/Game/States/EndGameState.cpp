@@ -20,7 +20,7 @@ void EndGameState::render(){
 
 void EndGameState::keyPressed(int key) {
     setNextState("Loading");
-    setNextState("Title");
+    setAfterState("Title");
     setFinished(true);
 }
 

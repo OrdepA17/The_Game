@@ -32,7 +32,7 @@ void OverworldState::tick()
             {
                 setEnemy(area->getEnemies().at(i));
                 setNextState("Loading");
-                setNextState("Battle");
+                setAfterState("Battle");
                 setFinished(true);
             }
         }
