@@ -16,6 +16,5 @@ class LoadingState : public State
         void keyPressed(int key);
         void mousePressed(int x, int y, int button);
         void reset();
-        
         int timer;
 };

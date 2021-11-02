@@ -9,7 +9,6 @@ LoadingState::LoadingState() {
 void LoadingState::tick() {
 
     timer++;
-    
     if(timer == 90){
         setFinished(true);
         timer = 0;
@@ -21,14 +20,6 @@ void LoadingState::render(){
 }
 
 void LoadingState::keyPressed(int key) { 
-    
-}
-
-void LoadingState::mousePressed(int x, int y, int button) {
-
-}
-
-void LoadingState::reset() {
     setFinished(false);
     //setNextState("");
-}
+    }
