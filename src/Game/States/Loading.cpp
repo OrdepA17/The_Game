@@ -1,7 +1,9 @@
 #include "Loading.h"
 
+
 LoadingState::LoadingState() {
     screen.load("images/ui/loading.png");
+    screen.draw(0,0,ofGetHeight(),ofGetWidth());
     music.load("audio/ui/beep.wav");
     timer = 0;
 }
