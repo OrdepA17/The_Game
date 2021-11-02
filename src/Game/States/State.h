@@ -46,11 +46,18 @@ string getCurrentStateName(){
 void setCurrentStateName(string currentStateName){
 	this->currentStateName= currentStateName;
 }
+string getNextNextState(){ 
+			return nextNextState;
+		}
+		void setNextNextState(string nextNextState){ 
+			this->nextNextState = nextNextState;
+		}
 //===================
 	protected:
 		string nextState;
 		ofSoundPlayer music;
 		bool finished = false;
 		string currentStateName;
+		string nextNextState;
 
 };

@@ -31,6 +31,7 @@ void OverworldState::tick()
             if (player->collides(area->getEnemies().at(i)))
             {
                 setEnemy(area->getEnemies().at(i));
+                setNextState("Loading");
                 setNextState("Battle");
                 setFinished(true);
             }
