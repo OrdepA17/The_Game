@@ -29,4 +29,5 @@ class OverworldState : public State
         void keyReleased(int key);
         void mousePressed(int x, int y, int button);
         void reset();
+        void checkPlayerCol();
 };

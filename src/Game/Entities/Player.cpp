@@ -43,14 +43,14 @@ void Player::tickOverworld()
         {
         case 'a':
             direction = Direction::left;
-            if (this->ox - speed >= CENTER_X)
+            if (this->ox - speed >= CENTER_X && canWalkLeft)
                 this->ox -= speed;
             walkLeft->tick();
             overworldSprite = walkLeft->getCurrentFrame();
             break;
         case 'd':
             direction = Direction::right;
-            if (this->ox + speed <= OXDIMENSION - CENTER_X)
+            if (this->ox + speed <= OXDIMENSION - CENTER_X && canWalkRight)
                 this->ox += speed;
 
             walkRight->tick();
@@ -58,7 +58,7 @@ void Player::tickOverworld()
             break;
         case 'w':
             direction = Direction::up;
-            if (this->oy - speed >= CENTER_Y)
+            if (this->oy - speed >= CENTER_Y && canWalkUp)
                 this->oy -= speed;
             walkUp->tick();
             overworldSprite = walkUp->getCurrentFrame();
@@ -66,7 +66,8 @@ void Player::tickOverworld()
             break;
         case 's':
             direction = Direction::down;
-            if (this->oy + speed <= OYDIMENSION - CENTER_Y)
+            speed=8;
+            if (this->oy + speed <= OYDIMENSION - CENTER_Y && canWalkDown)
                 this->oy += speed;
             walkDown->tick();
             overworldSprite = walkDown->getCurrentFrame();
@@ -141,4 +142,7 @@ Player::~Player() {
     delete walkDown;
     delete walkLeft;
     delete walkRight;
+}
+void Player::setSpeed(int speed){
+    this->speed = speed;
 }

@@ -18,6 +18,10 @@ class Player : public Entity, public Fighting {
         Direction direction = Direction::up;
         int speed = 8;
         bool walking = false;
+        bool canWalkUp = true;
+        bool canWalkDown = true;
+        bool canWalkRight = true;
+        bool canWalkLeft = true;
         Animation *walkUp;
         Animation *walkDown;
         Animation *walkLeft;
@@ -34,4 +38,11 @@ class Player : public Entity, public Fighting {
         void keyPressed(int key);
         void keyReleased(int key);
         void reset();
+        void setSpeed(int speed);
+        int getSpeed() {
+            return speed;}
+        void setcanWalkUp (bool b){canWalkUp=b;}
+        void setcanWalkDown (bool b){canWalkDown=b;}
+        void setcanWalkRight (bool b){canWalkRight=b;}
+        void setcanWalkLeft (bool b){canWalkLeft=b;}
 };
