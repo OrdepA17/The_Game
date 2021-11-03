@@ -2,8 +2,9 @@
 
 #include "Entity.h" 
 #include "Animation.h"
+#include "Fighters.h"
 
-class Enemy : public Entity {
+class Enemy : public Entity, public Fighting {
     private:
         Direction direction = Direction::down;
         int speed = 8;

@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(int health, int baseDamage) : Entity(INIT_X, INIT_Y, 64, 64, 64, 164, 192, 192, health, baseDamage, "images/entities/player/downframes/player-ow-front1.png", "images/entities/player/fightingframes/player-f1.png")
+Player::Player(int health, int baseDamage) : Entity(INIT_X, INIT_Y, 64, 64, "images/entities/player/fightingframes/player-f1.png"), Fighting(64, 164, 192, 192, health, baseDamage, "images/entities/player/downframes/player-ow-front1.png")
 {
 
     vector<ofImage> downFrames = {};
