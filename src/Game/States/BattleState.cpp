@@ -35,47 +35,83 @@ void BattleState::tick()
 {
     if (canInteract)
     {
-        if (currentPlayerHealth <= 0)
-        {
-            setNextState("End");
-            setFinished(true);
-            return;
+       if(dynamic_cast<Boss*>(enemy) == NULL){
+
+            if (currentPlayerHealth <= 0)
+            {
+                setNextState("End");
+                setFinished(true);
+                return;
+            }
+            else if (currentEnemyHealth <= 0)
+            {
+                setNextState("Win");
+                setFinished(true);
+                return;
+            }
         }
-        else if (currentEnemyHealth <= 0)
-        {
-            setNextState("Win");
-            setFinished(true);
-            return;
-        }
+
+        else {
+                if (currentPlayerHealth <= 0)
+                {
+                    setNextState("End");
+                    setFinished(true);
+                    return;
+                }
+                else if (currentEnemyHealth <= 0 && dynamic_cast<Boss*>(enemy)->getTimesDefeated() == 1)
+                    {
+                        setNextState("Win");
+                        setFinished(true);
+                        return;
+                    }
+                else if (currentEnemyHealth <= 0 && dynamic_cast<Boss*>(enemy)->getTimesDefeated() == 0)
+                    {
+                        dynamic_cast<Boss*>(enemy)->setTimesDefeated(1);
+                        currentEnemyHealth = enemy->getHealth();
+                    } 
+          }
     }
+        // if (currentPlayerHealth <= 0)
+        // {
+        //     setNextState("End");
+        //     setFinished(true);
+        //     return;
+        // }
+        // else if (currentEnemyHealth <= 0)
+        // {
+        //     setNextState("Win");
+        //     setFinished(true);
+        //     return;
+        // }
 
     player->tickFighting();
     enemy->tickFighting();
 
-    if (choice != Move::none && canInteract)
-    {
-        enemyChoice = rand() % 3 + 1;
-        if ((choice == Move::rock && enemyChoice == 2) || (choice == Move::paper && enemyChoice == 3) || (choice == Move::scissors && enemyChoice == 1))
+        if (choice != Move::none && canInteract)
         {
-            currentPlayerHealth -= enemy->getDmg() * 2.0;
-            currentEnemyHealth -= player->getDmg() / 2.0;
-            outcome = Outcome::lose;
+            enemyChoice = rand() % 3 + 1;
+            if ((choice == Move::rock && enemyChoice == 2) || (choice == Move::paper && enemyChoice == 3) || (choice == Move::scissors && enemyChoice == 1))
+            {
+                currentPlayerHealth -= enemy->getDmg() * 2.0;
+                currentEnemyHealth -= player->getDmg() / 2.0;
+                outcome = Outcome::lose;
+            }
+            else if ((choice == Move::rock && enemyChoice == 3) || (choice == Move::paper && enemyChoice == 1) || (choice == Move::scissors && enemyChoice == 2))
+            {
+                currentPlayerHealth -= enemy->getDmg() / 2.0;
+                currentEnemyHealth -= player->getDmg() * 2.0;
+                outcome = Outcome::win;
+            }
+            else
+            {
+                currentPlayerHealth -= enemy->getDmg();
+                currentEnemyHealth -= player->getDmg();
+                outcome = Outcome::draw;
+            }
+            resultTimer = 30;
+            canInteract = false;
         }
-        else if ((choice == Move::rock && enemyChoice == 3) || (choice == Move::paper && enemyChoice == 1) || (choice == Move::scissors && enemyChoice == 2))
-        {
-            currentPlayerHealth -= enemy->getDmg() / 2.0;
-            currentEnemyHealth -= player->getDmg() * 2.0;
-            outcome = Outcome::win;
-        }
-        else
-        {
-            currentPlayerHealth -= enemy->getDmg();
-            currentEnemyHealth -= player->getDmg();
-            outcome = Outcome::draw;
-        }
-        resultTimer = 30;
-        canInteract = false;
-    }
+    
 }
 
 void BattleState::render()

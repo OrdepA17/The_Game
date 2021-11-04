@@ -5,23 +5,6 @@
 #include "Fighters.h"
 
 class Enemy : public Entity, public Fighting {
-    private:
-        Direction direction = Direction::down;
-        int speed = 8;
-        bool walking = false;
-        int renderX = 1000;
-        int renderY = 1000;
-        Animation *walkUp;
-        Animation *walkDown;
-        Animation *walkLeft;
-        Animation *walkRight;
-        Animation *fighting;
-        string id;
-        int moveTimer;
-        bool dead = false;
-        string entityName;
-        ofImage sprite; 
-
     
     public:
         Enemy(string id, int health, int baseDamage, string entityName, int ox, int oy);
@@ -40,5 +23,21 @@ class Enemy : public Entity, public Fighting {
         void keyReleased(int key);
         void reset();
         string getId(){ return id; };
-        ofImage getSprite() { return overworldSprite;};
+        ofImage getSprite() { return overworldSprite;}; 
+        Direction direction = Direction::down;
+        int speed = 8;
+        bool walking = false;
+        int renderX = 1000;
+        int renderY = 1000;
+        Animation *walkUp;
+        Animation *walkDown;
+        Animation *walkLeft;
+        Animation *walkRight;
+        Animation *fighting;
+        string id;
+        int moveTimer;
+        bool dead = false;
+        string entityName;
+        ofImage sprite; 
+
 };

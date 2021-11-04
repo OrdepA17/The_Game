@@ -1,6 +1,6 @@
 #include "Eggs.h"
 
-Eggs::Eggs (int ox, int oy): Entity( ox, oy,64,64,"images/entities/eggs/eggs.png")
+Eggs::Eggs (int ox, int oy): Entity( ox, oy,80,80,"images/entities/eggs/eggs.png")
 
 {
     overworldSprite.load("images/entities/eggs/eggs.png");

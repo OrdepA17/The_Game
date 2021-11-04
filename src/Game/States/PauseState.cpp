@@ -16,7 +16,6 @@ void PauseState::render() {
 
 void PauseState::keyPressed(int key) {
 if (key=='p'){
-	setNextState("Overworld");
 	setFinished(true);
 }
 }
@@ -25,6 +24,5 @@ void PauseState::mousePressed(int x, int y, int button){
 }
 void PauseState::reset(){
 	setFinished(false);
-	setNextState("");
 }
 

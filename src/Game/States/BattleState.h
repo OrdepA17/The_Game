@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Area.h"
+#include "Boss.h"
 enum Move {rock, paper, scissors, none};
 enum Outcome {win, lose, draw};
 class BattleState : public State {

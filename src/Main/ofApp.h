@@ -10,6 +10,7 @@
 #include "Loading.h"
 #include "Eggs.h"
 #include "Friend.h"
+#include "Boss.h"
 
 class ofApp : public ofBaseApp{
 	public:

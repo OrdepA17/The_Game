@@ -1,11 +1,11 @@
 #include "Friend.h"
 
-Friend :: Friend(string name, int ox, int oy): Entity(ox, oy, 65, 65, "images/entities/friend/FriendlyTurkey.png")
+Friend :: Friend(string name, int ox, int oy): Entity(ox-100, oy+100, 80, 80, "images/entities/friend/FriendlyTurkey.png")
 {
     entityName = name;
 
-    overworldSprite.load("images/entities/friend/FriendlyTurkey.png");
-    message.load("images/ui/HelloThere.png");
+    overworldSprite.load("images/entities/friend/friend-ow-up1.png");
+    speach.load("images/ui/HelloThere.jpg");
 
     vector<ofImage> downFrames = {};
     vector<ofImage> upFrames = {};
@@ -13,15 +13,15 @@ Friend :: Friend(string name, int ox, int oy): Entity(ox, oy, 65, 65, "images/en
     vector<ofImage> rightFrames = {};
     ofImage temp;
 
-    for (int i = 1; i < 5; i++)
+    for (int i = 1; i < 4; i++)
     {
-        temp.load("images/entities/" + entityName + "/friend/"  + std::to_string(i == 3 ? 1 : i) + "FriendlyTurkey.png");
+        temp.load("images/entities/" + entityName + "/downframes/" + entityName + "-ow-down" + std::to_string(i == 3 ? 1 : i) + ".png");
         downFrames.push_back(temp);
-        temp.load("images/entities/" + entityName + "/friend/" + std::to_string(i == 3 ? 1 : i) + "FriendlyTurkey.png");
+        temp.load("images/entities/" + entityName + "/upframes/" + entityName + "-ow-up" + std::to_string(i == 3 ? 1 : i) + ".png");
         upFrames.push_back(temp);
-        temp.load("images/entities/" + entityName + "/friend/"  + std::to_string(i == 3 ? 1 : i) + "FriendlyTurkey.png");
+        temp.load("images/entities/" + entityName + "/leftframes/" + entityName + "-ow-left" + std::to_string(i == 3 ? 1 : i) + ".png");
         leftFrames.push_back(temp);
-        temp.load("images/entities/" + entityName + "/friend/" + std::to_string(i == 3 ? 1 : i) + "FriendlyTurkey.png");
+        temp.load("images/entities/" + entityName + "/rightframes/" + entityName + "-ow-right" + std::to_string(i == 3 ? 1 : i) + ".png");
         rightFrames.push_back(temp);
     }
 
@@ -90,19 +90,19 @@ void Friend::tickOverworld()
     }
     else
     {
-        switch (direction)
+       switch (direction)
         {
         case Direction::left:
-            overworldSprite.load("images/entities/" + entityName + "/friend/" + entityName + "FriendlyTurkey.png");
+            overworldSprite.load("images/entities/" + entityName + "/leftframes/" + entityName + "-ow-left1.png");
             break;
         case Direction::right:
-            overworldSprite.load("images/entities/" + entityName + "/friend/" + entityName + "FriendlyTurkey.png");
+            overworldSprite.load("images/entities/" + entityName + "/rightframes/" + entityName + "-ow-right1.png");
             break;
         case Direction::up:
-            overworldSprite.load("images/entities/" + entityName + "/friend/" + entityName + "FriendlyTurkey.png");
+            overworldSprite.load("images/entities/" + entityName + "/upframes/" + entityName + "-ow-up1.png");
             break;
         case Direction::down:
-            overworldSprite.load("images/entities/" + entityName + "/friend/" + entityName + "FriendlyTurkey.png");
+            overworldSprite.load("images/entities/" + entityName + "/downframes/" + entityName + "-ow-down1.png");
             break;
         }
     }
@@ -113,7 +113,7 @@ void Friend::renderOverworld()
 {
     overworldSprite.draw(renderX, renderY, ow, oh);
     
-    if (interacting) message.draw(renderX, renderY - 50, 100, 50);
+    if (interacting) {speach.draw(renderX, renderY - 50, 140, 70);}
 }
 Friend::~Friend(){
     delete walkDown;

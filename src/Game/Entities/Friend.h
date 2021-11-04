@@ -20,7 +20,7 @@ class Friend : public Entity {
         string entityName;
         bool interacting = false;
         bool canInteract = false;
-        ofImage message;
+        ofImage speach;
 
     
     public:

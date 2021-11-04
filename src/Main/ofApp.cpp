@@ -51,7 +51,8 @@ void ofApp::setupAreas()
 	enemies2.push_back(area2Enemy4);
 	enemies2.push_back(area2Enemy5);
 	enemies2.push_back(area2Enemy6);
-	area2 = new Area(NULL, "images/areas/area2.png", "audio/ice.wav", "images/stages/stage2.png", entrancePosition2, enemies2,{}); 
+	Boss *bossArea2 = new Boss ("Boss", 60, 12, "boss", 4 * 200, 4 * 400);
+	area2 = new Area(NULL, "images/areas/area2.png", "audio/ice.wav", "images/stages/stage2.png", entrancePosition2, enemies2,{}, bossArea2); 
 	vector<Enemy *> enemies1;
 	ofPoint entrancePosition1(4 * 414, 4 * 566);
 	Enemy *area1Enemy1 = new Enemy("11", 20, 4, "enemy1", 4 * 480, 4 * 432);
@@ -60,7 +61,8 @@ void ofApp::setupAreas()
 	enemies1.push_back(area1Enemy1);
 	enemies1.push_back(area1Enemy2);
 	enemies1.push_back(area1Enemy3);
-	area1 = new Area(area2, "images/areas/area1.png", "audio/forest.wav", "images/stages/stage1.png", entrancePosition1, enemies1, entities);
+	Boss *bossArea1 = new Boss ("Boss", 60, 12, "boss", 4 * 200, 4 * 400);
+	area1 = new Area(area2, "images/areas/area1.png", "audio/forest.wav", "images/stages/stage1.png", entrancePosition1, enemies1, entities, bossArea1);
 	currentArea = area1;
 }
 
@@ -110,20 +112,23 @@ void ofApp::update()
 			else if (currentState->getNextState() == "Battle")
 			{
 				//Fix PauseState when also in Battle State
-				if(currentState==pauseState){
+			if(currentState == pauseState){
 					battleState->setCurrentStateName("Pause");
-					}
+				}
+				
+				else {battleState->setCurrentStateName("Battle");}
 
-				 else {battleState->setCurrentStateName("Battle");}
-
-				 battleState->startBattle(overworldState->getEnemy());
+				battleState->startBattle(overworldState->getEnemy());
 				currentState = battleState;
 				
 			}
 			else if (currentState->getNextState() == "Win")
 			{
 				overworldState->getEnemy()->kill();
-				if (currentArea->getRemainingEnemies() == 0)
+
+			if(!currentArea->getBoss()->isDead() && currentArea->getRemainingEnemies() == 0) currentArea->setBoss();
+
+				if (currentArea->getRemainingEnemies() == 0 && currentArea->getBoss()->isDead())
 				{
 					if (currentArea->getNextArea() == NULL)
 					{
@@ -145,12 +150,13 @@ void ofApp::update()
 			}
 			//PauseState fix
 			else if (currentState->getNextState()=="Pause"){
-			if (currentState->getCurrentStateName()== "Overworld")
-			pauseState->setNextState("Overworld");
-			
-			if(currentState->getCurrentStateName()== "Battle")
-			pauseState->setNextState("Battle");
-			currentState= pauseState;
+				if (currentState->getCurrentStateName()== "Overworld")
+					pauseState->setNextState("Overworld");
+				
+				if(currentState->getCurrentStateName()== "Battle")
+					pauseState->setNextState("Battle");
+
+				currentState= pauseState;
 			}
 			
 			else if (currentState->getNextState() == "End")
@@ -204,6 +210,8 @@ void ofApp::keyPressed(int key)
 
 		if(currentArea == area2){area2->resetEnemies();}
 	}
+
+
 }
 
 }

@@ -2,7 +2,8 @@
 
 WinState::WinState() {
     screen.load("images/ui/winscreen.png");
-    music.load("audio/ui/beep.wav");
+    music.load("audio/ui/Win.wav");
+    music.setVolume(1.0);
 
 }
 

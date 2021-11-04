@@ -20,28 +20,28 @@ void OverworldState::loadArea(Area *area)
     player->setOY(area->getEntrancePos().y);
 }
 
-void OverworldState :: checkPlayerCol(){
+void OverworldState::checkPlayerCol(){
 
-player-> setcanWalkUp (true);
-player-> setcanWalkDown (true);
-player-> setcanWalkRight (true);
-player-> setcanWalkLeft (true);
+    player-> setcanWalkUp (true);
+    player-> setcanWalkDown (true);
+    player-> setcanWalkRight (true);
+    player-> setcanWalkLeft (true);
 
-for (Entity *e :area->getEntities()){
-if (player->getBounds(player->getOX(),player->getOY()+player->getSpeed()).intersects(e->getBounds())){
-    player->setcanWalkDown(false);
-}
-if (player->getBounds(player->getOX(),player->getOY()+player->getSpeed()).intersects(e->getBounds())){
-    player->setcanWalkUp(false);
-}
-if (player->getBounds(player->getOX(),player->getOY()+player->getSpeed()).intersects(e->getBounds())){
-    player->setcanWalkRight(false);
-}
-if (player->getBounds(player->getOX(),player->getOY()+player->getSpeed()).intersects(e->getBounds())){
-    player->setcanWalkLeft(false);
-}
-}
-for(Entity *e : area->getEntities()){
+    for(Entity *e : area-> getEntities()){
+        if(player->getBounds(player->getOX(),player->getOY() + player->getSpeed()).intersects(e->getBounds())){
+            player->setcanWalkDown(false);
+        }
+        if(player->getBounds(player->getOX(),player->getOY() - player->getSpeed()).intersects(e->getBounds())){
+            player->setcanWalkUp(false);
+        }
+        if(player->getBounds(player->getOX() - player->getSpeed(),player->getOY()).intersects(e->getBounds())){
+            player->setcanWalkLeft(false);
+        }
+        if(player->getBounds(player->getOX() + player->getSpeed(),player->getOY()).intersects(e->getBounds())){
+            player->setcanWalkRight(false);
+        }
+    }
+    for(Entity *e : area->getEntities()){
 
         Friend* f = dynamic_cast<Friend*>(e);
         if(f == NULL) continue;
@@ -81,13 +81,14 @@ void OverworldState::tick()
             }
         }
     }
-            for (unsigned int i=0;i< area->getEntities().size();i++)
-            {area->getEntities().at(i)->tickOverworld();
+    for (unsigned int i = 0; i < area->getEntities().size(); i++)
+    {
+         area->getEntities().at(i)->tickOverworld();
             if (player->collides(area->getEntities().at(i)))
             {
-                player->setSpeed(0);
+               player->setSpeed(0); 
             }
-            
+                
     }
     camera->tick();
 }
@@ -108,27 +109,23 @@ void OverworldState::render()
             area->getEnemies().at(i)->renderOverworld();
         }
     }
-for (unsigned int i = 0; i < area->getEntities().size(); i++)
+
+    for (unsigned int i = 0; i < area->getEntities().size(); i++)
     {
-        if (!area->getEnemies().at(i)->isDead())
-        {
-            //int playerDistanceX = area->getEggs().at(i)->getOX() - camera->getPlayerX();
-            //int playerDistanceY = area->getEggs().at(i)->getOY() - camera->getPlayerY();
-           // eggs->setRenderX(camera->getDimensionX() / 2 + playerDistanceX);
-           // eggs->setRenderY(camera->getDimensionY() / 2 + playerDistanceY);
-           // eggs->renderOverworld();
+        
+        Eggs* eggs = dynamic_cast<Eggs*>(area->getEntities().at(i));
 
-Eggs* eggs= dynamic_cast<Eggs*>(area->getEntities().at(i));
-if (eggs== NULL) continue;
+        if (eggs == NULL) continue;
 
-int playerDistanceX = area->getEntities().at(i)->getOX() - camera->getPlayerX();
-    int playerDistanceY = area->getEntities().at(i)->getOY() - camera->getPlayerY();
-    eggs->setRenderX(camera->getDimensionX() / 2 + playerDistanceX);
-    eggs->setRenderY(camera->getDimensionY() / 2 + playerDistanceY);
-    eggs->renderOverworld();
-        }
+        int playerDistanceX = area->getEntities().at(i)->getOX() - camera->getPlayerX();
+        int playerDistanceY = area->getEntities().at(i)->getOY() - camera->getPlayerY();
+        eggs->setRenderX(camera->getDimensionX() / 2 + playerDistanceX);
+        eggs->setRenderY(camera->getDimensionY() / 2 + playerDistanceY);
+        eggs->renderOverworld();
+        
     }
-for (unsigned int i = 0; i < area->getEntities().size(); i++)
+
+    for (unsigned int i = 0; i < area->getEntities().size(); i++)
     {
         
         Friend* friend1 = dynamic_cast<Friend*>(area->getEntities().at(i));
@@ -154,20 +151,21 @@ void OverworldState::playerInteractions(){
 
         if(f->getCanInteract()) {f->setInteracting(!f->getInteracting());}
     }
-
 }
 
 void OverworldState::keyPressed(int key)
 {
     player->keyPressed(key);
-    
-    if(key=='p'||key=='P'){
-        setCurrentStateName("Overworld");
+
+    if (key == 'p'){
+        setCurrentStateName ("Overworld");
         setNextState("Pause");
         setFinished(true);
         return;
     }
-    if (key=='e') playerInteractions();
+    if (key == 'e') playerInteractions();
+    
+
 }
 
 void OverworldState::keyReleased(int key)

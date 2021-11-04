@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "OverworldCamera.h"
 #include "Eggs.h"
+#include "Boss.h"
 
 class Area 
 {
@@ -15,9 +16,10 @@ class Area
         std::vector<Enemy*> enemies;
         Area *nextArea;
         std::vector<Entity*> entities;
+        Boss *boss;
 
     public:
-        Area(Area *nextArea, string areaImagePath, string areaMusicPath, string areaStagePath, ofPoint entrancePosition, vector<Enemy*> enemies,vector<Entity*>entities);
+        Area(Area *nextArea, string areaImagePath, string areaMusicPath, string areaStagePath, ofPoint entrancePosition, vector<Enemy*> enemies,vector<Entity*>entities, Boss *boss);
         void resetEnemies();
         ofImage getImage() { return areaImage;};
         ofSoundPlayer getMusic() { return areaMusic;};
@@ -28,5 +30,7 @@ class Area
         int getRemainingEnemies();
         Area* getNextArea() { return nextArea;};
         vector<Entity*> getEntities() {return entities;};
+        Boss* getBoss(){return boss;}
+        void setBoss(){enemies.push_back(boss);}
         
 };
