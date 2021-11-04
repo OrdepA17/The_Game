@@ -41,6 +41,25 @@ if (player->getBounds(player->getOX(),player->getOY()+player->getSpeed()).inters
     player->setcanWalkLeft(false);
 }
 }
+for(Entity *e : area->getEntities()){
+
+        Friend* f = dynamic_cast<Friend*>(e);
+        if(f == NULL) continue;
+        f->setCanInteract(false);
+
+        if(player->getBounds(player->getOX(),player->getOY() + player->getSpeed() * 2).intersects(e->getBounds())){
+            f->setCanInteract(true);
+        }
+        if(player->getBounds(player->getOX(),player->getOY() - player->getSpeed() * 2).intersects(e->getBounds())){
+            f->setCanInteract(true);
+        }
+        if(player->getBounds(player->getOX() - player->getSpeed() * 2,player->getOY()).intersects(e->getBounds())){
+            f->setCanInteract(true);
+        }
+        if(player->getBounds(player->getOX() + player->getSpeed() * 2,player->getOY()).intersects(e->getBounds())){
+            f->setCanInteract(true);
+        }
+    }
 }
 
 void OverworldState::tick()
@@ -109,6 +128,32 @@ int playerDistanceX = area->getEntities().at(i)->getOX() - camera->getPlayerX();
     eggs->renderOverworld();
         }
     }
+for (unsigned int i = 0; i < area->getEntities().size(); i++)
+    {
+        
+        Friend* friend1 = dynamic_cast<Friend*>(area->getEntities().at(i));
+
+        if (friend1 == NULL) continue;
+
+        int playerDistanceX = area->getEntities().at(i)->getOX() - camera->getPlayerX();
+        int playerDistanceY = area->getEntities().at(i)->getOY() - camera->getPlayerY();
+        friend1->setRenderX(camera->getDimensionX() / 2 + playerDistanceX);
+        friend1->setRenderY(camera->getDimensionY() / 2 + playerDistanceY);
+        friend1->renderOverworld();
+        
+    }
+}
+
+void OverworldState::playerInteractions(){
+
+    for(Entity *e : area->getEntities()){
+
+        Friend* f = dynamic_cast<Friend*>(e);
+
+        if (f == NULL) continue;
+
+        if(f->getCanInteract()) {f->setInteracting(!f->getInteracting());}
+    }
 
 }
 
@@ -122,6 +167,7 @@ void OverworldState::keyPressed(int key)
         setFinished(true);
         return;
     }
+    if (key=='e') playerInteractions();
 }
 
 void OverworldState::keyReleased(int key)

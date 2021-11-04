@@ -36,6 +36,8 @@ void ofApp::setupAreas()
 	vector<Entity*> entities;
 	Entity *eggs = new Eggs(4*480,4*432);
 	entities.push_back(eggs);
+	Entity *friend1 = new Friend("Friend",4*440,4*432);
+	entities.push_back(friend1);
 
 	Enemy *area2Enemy1 = new Enemy("21", 30, 6, "enemy2", 4 * 120, 4 * 342);
 	Enemy *area2Enemy2 = new Enemy("22", 30, 6, "enemy2", 4 * 254, 4 * 130);

@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "OverworldCamera.h"
+#include "Friend.h"
 
 class OverworldState : public State
 {
@@ -30,4 +31,5 @@ class OverworldState : public State
         void mousePressed(int x, int y, int button);
         void reset();
         void checkPlayerCol();
+        void playerInteractions();
 };

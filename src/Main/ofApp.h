@@ -9,6 +9,7 @@
 #include "PauseState.h"
 #include "Loading.h"
 #include "Eggs.h"
+#include "Friend.h"
 
 class ofApp : public ofBaseApp{
 	public:
